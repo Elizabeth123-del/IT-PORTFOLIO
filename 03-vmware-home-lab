@@ -1,0 +1,53 @@
+# Project 03 — VMware Home Lab
+
+## Status
+Completed — March 2026
+
+## Overview
+Built a virtualized home lab environment using VMware 
+Workstation Pro with two virtual machines to simulate 
+a real enterprise IT environment.
+
+## Virtual Machines Created
+
+### VM 1 — Windows Server 2022
+- OS: Windows Server 2022 Standard Evaluation
+- RAM: 4GB
+- Storage: 50GB
+- Purpose: Will be used as Domain Controller 
+  in Project 04
+
+### VM 2 — Ubuntu Server 24.04
+- OS: Ubuntu Server 24.04.4 LTS
+- RAM: 2GB
+- Storage: 25GB
+- Purpose: Will be used for Linux administration, 
+  security tools, and cybersecurity projects
+
+## Network Configuration
+- Hypervisor: VMware Workstation Pro
+- Network Type: NAT
+- Internal Network: 192.168.126.0/24
+- Windows Server IP: 192.168.126.X (redacted)
+- Ubuntu Server IP: 192.168.126.X (redacted)
+- Host machine IP redacted for security purposes
+
+## Snapshots Taken
+- ubuntu-server-clean-install
+- windows-server-clean-install
+
+## Tools Used
+- VMware Workstation Pro
+- Windows Server 2022 Evaluation ISO
+- Ubuntu Server 24.04.4 LTS ISO
+- draw.io for network diagram
+
+## Skills Demonstrated
+- Virtual machine creation and configuration
+- Operating system installation
+- Network configuration in VMware
+- Snapshot management
+- Network topology documentation
+
+## Screenshots
+All screenshots are in the screenshots folder above.
