@@ -13,7 +13,7 @@ data analytics, and security operations.
 
 ### Phase 1 — Foundation
 - [ ] 02 — IT Documentation Hub
-- [ ] 03 — VirtualBox Home Lab
+- [ ] 03 — Vmware Home Lab
 - [ ] 04 — Active Directory Lab
 
 ### Phase 2 — Systems & Networking
