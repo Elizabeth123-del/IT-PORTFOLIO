@@ -1,0 +1,62 @@
+# Script 2 — System Health Report
+# Created by: Elizabeth Oluwakoya
+# Date: March 2026
+
+$date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$report = "C:\HealthReport-$(Get-Date -Format 'yyyy-MM-dd').txt"
+
+Write-Host "Generating System Health Report..." -ForegroundColor Cyan
+
+# Computer Info
+$computerName = $env:COMPUTERNAME
+$os = Get-CimInstance Win32_OperatingSystem
+
+# CPU Load
+$cpu = Get-CimInstance Win32_Processor
+$cpuLoad = $cpu.LoadPercentage
+
+# Memory
+$totalRAM = [math]::Round($os.TotalVisibleMemorySize / 1MB, 2)
+$freeRAM = [math]::Round($os.FreePhysicalMemory / 1MB, 2)
+$usedRAM = [math]::Round($totalRAM - $freeRAM, 2)
+
+# Disk Usage
+$disk = Get-PSDrive C
+$totalDisk = [math]::Round(($disk.Used + $disk.Free) / 1GB, 2)
+$usedDisk = [math]::Round($disk.Used / 1GB, 2)
+$freeDisk = [math]::Round($disk.Free / 1GB, 2)
+
+# Services
+$stoppedServices = Get-Service | Where-Object {$_.Status -eq "Stopped" -and $_.StartType -eq "Automatic"}
+
+# Write Report
+$content = @"
+====================================
+SYSTEM HEALTH REPORT
+====================================
+Date: $date
+Computer: $computerName
+
+MEMORY
+Total RAM: $totalRAM GB
+Used RAM: $usedRAM GB
+Free RAM: $freeRAM GB
+
+CPU
+CPU Load: $cpuLoad%
+
+DISK (C:)
+Total: $totalDisk GB
+Used: $usedDisk GB
+Free: $freeDisk GB
+
+STOPPED AUTOMATIC SERVICES
+$($stoppedServices | Format-Table Name, Status -AutoSize | Out-String)
+====================================
+"@
+
+$content | Out-File $report
+Write-Host $content
+Write-Host "Report saved to: $report" -ForegroundColor Green
+```
+

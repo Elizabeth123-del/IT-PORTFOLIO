@@ -1,0 +1,41 @@
+# Script 1 — Bulk AD User Creation
+# Created by: Elizabeth Oluwakoya
+# Date: March 2026
+
+Import-Module ActiveDirectory
+
+$users = @(
+    @{FirstName="John"; LastName="Smith"; Department="HR"; OU="OU=HR,DC=corp,DC=local"},
+    @{FirstName="Emma"; LastName="Jones"; Department="HR"; OU="OU=HR,DC=corp,DC=local"},
+    @{FirstName="Robert"; LastName="Taylor"; Department="Finance"; OU="OU=Finance,DC=corp,DC=local"},
+    @{FirstName="Lisa"; LastName="Brown"; Department="Finance"; OU="OU=Finance,DC=corp,DC=local"},
+    @{FirstName="James"; LastName="Wilson"; Department="IT"; OU="OU=IT,DC=corp,DC=local"},
+    @{FirstName="Sarah"; LastName="Moore"; Department="IT"; OU="OU=IT,DC=corp,DC=local"},
+    @{FirstName="Michael"; LastName="Davis"; Department="Management"; OU="OU=Management,DC=corp,DC=local"},
+    @{FirstName="Jennifer"; LastName="Miller"; Department="Management"; OU="OU=Management,DC=corp,DC=local"}
+)
+
+foreach ($user in $users) {
+    $username = "$($user.FirstName.ToLower()).$($user.LastName.ToLower())"
+    $password = ConvertTo-SecureString "Password@123" -AsPlainText -Force
+    
+    try {
+        New-ADUser `
+            -GivenName $user.FirstName `
+            -Surname $user.LastName `
+            -Name "$($user.FirstName) $($user.LastName)" `
+            -SamAccountName $username `
+            -UserPrincipalName "$username@corp.local" `
+            -Path $user.OU `
+            -Department $user.Department `
+            -AccountPassword $password `
+            -Enabled $true
+        
+        Write-Host "Created user: $username" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "Failed to create user: $username - $_" -ForegroundColor Red
+    }
+}
+
+Write-Host "Bulk user creation complete!" -ForegroundColor Cyan

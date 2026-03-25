@@ -1,0 +1,27 @@
+# Script 3 — Inactive AD User Audit
+# Created by: Elizabeth Oluwakoya
+# Date: March 2026
+
+Import-Module ActiveDirectory
+
+$daysInactive = 90
+$cutoffDate = (Get-Date).AddDays(-$daysInactive)
+$report = "C:\InactiveUsers-$(Get-Date -Format 'yyyy-MM-dd').csv"
+
+Write-Host "Searching for users inactive for $daysInactive+ days..." -ForegroundColor Cyan
+
+$inactiveUsers = Get-ADUser -Filter {
+    LastLogonDate -lt $cutoffDate -and Enabled -eq $true
+} -Properties LastLogonDate, Department, EmailAddress |
+Select-Object Name, SamAccountName, Department, LastLogonDate, EmailAddress
+
+if ($inactiveUsers) {
+    $inactiveUsers | Export-Csv $report -NoTypeInformation
+    Write-Host "Found $($inactiveUsers.Count) inactive users" -ForegroundColor Yellow
+    $inactiveUsers | Format-Table -AutoSize
+    Write-Host "Report saved to: $report" -ForegroundColor Green
+} else {
+    Write-Host "No inactive users found" -ForegroundColor Green
+}
+```
+
