@@ -16,13 +16,13 @@ data analytics, and security operations.
 - [ ] 03 - Vmware Home Lab
 - [ ] 04 - Active Directory Lab
 
-### Phase 2 — Systems & Networking
+### Phase 2 - Systems & Networking
 - [ ] 05 - Linux Server Hardening
 - [ ] 06 - VLAN Network Design
 - [ ] 07 - PowerShell IT Scripts
 - [ ] 08 - osTicket Helpdesk Lab
 
-### Phase 3 — Cloud & Automation
+### Phase 3 - Cloud & Automation
 - [ ] 09 - AWS Cloud Infrastructure
 - [ ] 10 - Azure AD & M365 Lab
 - [ ] 11 - Terraform AWS Lab
@@ -34,7 +34,7 @@ data analytics, and security operations.
 - [ ] 15 - Zendesk Admin Lab
 - [ ] 16 - Zabbix Monitoring Lab
 
-### Phase 5 — Cybersecurity
+### Phase 5 - Cybersecurity
 - [ ] 17 - Wazuh SIEM Lab
 - [ ] 18 - Vulnerability Scanning Lab
 - [ ] 19 - pfSense Firewall Lab
